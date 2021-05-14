@@ -1,5 +1,5 @@
 name: swell-foop
-version: git
+adopt-info: swell-foop
 summary: Clear the screen by removing groups of colored and shaped tiles
 description: |
   Remove as many squares as possible from the board. Click on a group of
@@ -53,6 +53,9 @@ parts:
     source-type: git
     plugin: meson
     meson-parameters: [--prefix=/snap/swell-foop/current/usr]
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version $(git describe --tags --abbrev=10)
     override-build: |
       sed -i.bak -e 's|Icon=org.gnome.SwellFoop$|Icon=${SNAP}/meta/gui/org.gnome.SwellFoop.png|g' data/org.gnome.SwellFoop.desktop.in
       snapcraftctl build
