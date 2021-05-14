@@ -1,0 +1,74 @@
+name: swell-foop
+version: git
+summary: Clear the screen by removing groups of colored and shaped tiles
+description: |
+  Remove as many squares as possible from the board. Click on a group of
+  squares of the same color to make them all disappear in one fell swoop,
+  causing other squares to fall into place. It is not possible to remove a
+  single square at a time. You get far more points for clearing a larger group
+  of squares, and also for clearing the entire board.
+
+  Swell Foop is always very quick to play, but you can make it somewhat longer
+  by changing the board size.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict
+base: core18
+
+# Launchpad doesn't recognize these fields yet
+passthrough:
+  license: GPL-2.0+
+  title: Swell Foop
+
+slots:
+  # for GtkApplication registration
+  swell-foop:
+    interface: dbus
+    bus: session
+    name: org.gnome.SwellFoop
+
+apps:
+  swell-foop:
+    command: usr/bin/swell-foop
+    extensions: [gnome-3-34]
+    plugs:
+      - gsettings
+      - opengl
+    desktop: usr/share/applications/org.gnome.SwellFoop.desktop
+    environment:
+      GSETTINGS_SCHEMA_DIR: $SNAP/share/glib-2.0/schemas
+
+parts:
+# needed for clutter to work
+  snapcraft-preload:
+    source: https://github.com/sergiusens/snapcraft-preload.git
+    plugin: cmake
+    build-packages:
+      - on amd64:
+          - gcc-multilib
+          - g++-multilib
+
+  swell-foop:
+    source: https://gitlab.gnome.org/GNOME/swell-foop.git
+    source-type: git
+    plugin: meson
+    meson-parameters: [--prefix=/snap/swell-foop/current/usr]
+    override-build: |
+      sed -i.bak -e 's|Icon=org.gnome.SwellFoop$|Icon=${SNAP}/meta/gui/org.gnome.SwellFoop.png|g' data/org.gnome.SwellFoop.desktop.in
+      snapcraftctl build
+      mkdir -p $SNAPCRAFT_PART_INSTALL/meta/gui/
+      cp ../src/data/icons/hicolor/512x512/apps/org.gnome.SwellFoop.png $SNAPCRAFT_PART_INSTALL/meta/gui/
+      cp ../install/snap/swell-foop/current/usr/share/applications/org.gnome.SwellFoop.desktop $SNAPCRAFT_PART_INSTALL/meta/gui/
+    organize:
+      snap/swell-foop/current/usr: usr
+    build-packages:
+      - libgudev-1.0-dev
+      - libgnome-games-support-1-dev
+
+  libs:
+    after: [swell-foop]
+    plugin: nil
+    stage-packages:
+      - libgnome-games-support-1-3
+    prime:
+      - usr/lib/*/libgnome-games*
