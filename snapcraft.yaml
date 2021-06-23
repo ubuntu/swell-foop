@@ -51,6 +51,7 @@ parts:
   swell-foop:
     source: https://gitlab.gnome.org/GNOME/swell-foop.git
     source-type: git
+    source-tag: '3.34.1'
     plugin: meson
     meson-parameters: [--prefix=/snap/swell-foop/current/usr]
     override-pull: |
