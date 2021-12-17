@@ -51,7 +51,7 @@ parts:
     after: [snapcraft-preload]
     source: https://gitlab.gnome.org/GNOME/swell-foop.git
     source-type: git
-    source-tag: '40.0'
+    source-tag: '41.0.1'
     plugin: meson
     meson-parameters: [--prefix=/snap/swell-foop/current/usr]
     override-pull: |
