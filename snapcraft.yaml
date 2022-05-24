@@ -20,6 +20,7 @@ apps:
     desktop: usr/share/applications/org.gnome.SwellFoop.desktop
     environment:
       GSETTINGS_SCHEMA_DIR: $SNAP/share/glib-2.0/schemas
+      DISABLE_WAYLAND: 'true'
 
 parts:
   swell-foop:
