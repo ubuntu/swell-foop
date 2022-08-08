@@ -54,4 +54,3 @@ parts:
       craftctl default
       mkdir -p $CRAFT_PART_INSTALL/meta/gui/
       cp $CRAFT_PART_SRC/data/icons/hicolor/512x512/apps/org.gnome.SwellFoop.png $CRAFT_PART_INSTALL/meta/gui/
-      cp $CRAFT_PART_INSTALL/usr/share/applications/org.gnome.SwellFoop.desktop $CRAFT_PART_INSTALL/meta/gui/
