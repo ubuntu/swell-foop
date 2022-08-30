@@ -46,9 +46,6 @@ parts:
     meson-parameters:
       - --prefix=/usr
     parse-info: [usr/share/metainfo/org.gnome.SwellFoop.appdata.xml]
-    override-pull: |
-      craftctl default
-      craftctl set version=$(git describe --tags --abbrev=10)
     override-build: |
       sed -i.bak -e 's|Icon=org.gnome.SwellFoop$|Icon=${SNAP}/meta/gui/org.gnome.SwellFoop.png|g' $CRAFT_PART_SRC/data/org.gnome.SwellFoop.desktop.in
       craftctl default
