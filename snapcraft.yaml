@@ -30,6 +30,7 @@ apps:
 parts:
   snapcraft-preload:
     source: https://github.com/sergiusens/snapcraft-preload.git
+    source-depth: 1
     plugin: cmake
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/
@@ -42,6 +43,7 @@ parts:
     source: https://gitlab.gnome.org/GNOME/swell-foop.git
     source-type: git
     source-tag: '41.1'
+    source-depth: 1
     plugin: meson
     meson-parameters:
       - --prefix=/usr
