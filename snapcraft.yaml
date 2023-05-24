@@ -2,7 +2,7 @@ name: swell-foop
 adopt-info: swell-foop
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
-base: core20
+base: core22
 
 slots:
   # for GtkApplication registration
@@ -14,7 +14,7 @@ slots:
 apps:
   swell-foop:
     command: usr/bin/swell-foop
-    extensions: [gnome-3-38]
+    extensions: [gnome]
     plugs:
       - opengl
     desktop: usr/share/applications/org.gnome.SwellFoop.desktop
@@ -28,17 +28,18 @@ parts:
     source: https://gitlab.gnome.org/GNOME/swell-foop.git
     source-type: git
     source-tag: '41.1'
+    source-depth: 1
     plugin: meson
     meson-parameters: [--prefix=/snap/swell-foop/current/usr]
     parse-info: [usr/share/metainfo/org.gnome.SwellFoop.appdata.xml]
     override-pull: |
-      snapcraftctl pull
-      snapcraftctl set-version $(git describe --tags --abbrev=10)
+      craftctl default
+      craftctl set version=$(git describe --tags --abbrev=10)
     override-build: |
-      sed -i.bak -e 's|Icon=org.gnome.SwellFoop$|Icon=${SNAP}/meta/gui/org.gnome.SwellFoop.png|g' $SNAPCRAFT_PART_SRC/data/org.gnome.SwellFoop.desktop.in
-      snapcraftctl build
-      mkdir -p $SNAPCRAFT_PART_INSTALL/meta/gui/
-      cp ../src/data/icons/hicolor/512x512/apps/org.gnome.SwellFoop.png $SNAPCRAFT_PART_INSTALL/meta/gui/
-      cp ../install/snap/swell-foop/current/usr/share/applications/org.gnome.SwellFoop.desktop $SNAPCRAFT_PART_INSTALL/meta/gui/
+      sed -i.bak -e 's|Icon=org.gnome.SwellFoop$|Icon=${SNAP}/meta/gui/org.gnome.SwellFoop.png|g' $CRAFT_PART_SRC/data/org.gnome.SwellFoop.desktop.in
+      craftctl default
+      mkdir -p $CRAFT_PART_INSTALL/meta/gui/
+      cp ../src/data/icons/hicolor/512x512/apps/org.gnome.SwellFoop.png $CRAFT_PART_INSTALL/meta/gui/
+      cp ../install/snap/swell-foop/current/usr/share/applications/org.gnome.SwellFoop.desktop $CRAFT_PART_INSTALL/meta/gui/
     organize:
       snap/swell-foop/current/usr: usr
