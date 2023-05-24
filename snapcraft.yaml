@@ -29,6 +29,9 @@ apps:
 
 parts:
   snapcraft-preload:
+# ext:updatesnap
+#   version-format:
+#     allow-neither-tag-nor-branch
     source: https://github.com/sergiusens/snapcraft-preload.git
     source-depth: 1
     plugin: cmake
