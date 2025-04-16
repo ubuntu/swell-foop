@@ -45,7 +45,7 @@ parts:
   swell-foop:
     source: https://gitlab.gnome.org/GNOME/swell-foop.git
     source-type: git
-    source-tag: '46.0'
+    source-tag: '48.1'
     source-depth: 1
     plugin: meson
     meson-parameters:
