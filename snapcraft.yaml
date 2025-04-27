@@ -19,8 +19,6 @@ apps:
   swell-foop:
     command: bin/snapcraft-preload $SNAP/usr/bin/swell-foop
     extensions: [gnome]
-    plugs:
-      - opengl
     desktop: usr/share/applications/org.gnome.SwellFoop.desktop
     common-id: org.gnome.SwellFoop.desktop
     environment:
