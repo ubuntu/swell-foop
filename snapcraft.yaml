@@ -17,29 +17,12 @@ layout:
 
 apps:
   swell-foop:
-    command: bin/snapcraft-preload $SNAP/usr/bin/swell-foop
+    command: usr/bin/swell-foop
     extensions: [gnome]
     desktop: usr/share/applications/org.gnome.SwellFoop.desktop
     common-id: org.gnome.SwellFoop.desktop
-    environment:
-      GSETTINGS_SCHEMA_DIR: $SNAP/share/glib-2.0/schemas
-      DISABLE_WAYLAND: 'true'
 
 parts:
-  snapcraft-preload:
-# ext:updatesnap
-#   version-format:
-#     allow-neither-tag-nor-branch: true
-    source: https://github.com/sergiusens/snapcraft-preload.git
-    source-depth: 1
-    plugin: cmake
-    cmake-parameters:
-      - -DCMAKE_INSTALL_PREFIX=/
-    build-packages:
-      - on amd64:
-        - gcc-multilib
-        - g++-multilib
-
   swell-foop:
     source: https://gitlab.gnome.org/GNOME/swell-foop.git
     source-type: git
